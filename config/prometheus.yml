@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ["127.0.0.1:9090"]
+
+  # 后端 FastAPI 通过 prometheus_client 暴露 /metrics
+  - job_name: ops-ai-backend
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["127.0.0.1:8000"]
+
+  # 被管服务器需部署 node_exporter（PRD 未写，但指标采集依赖它）
+  - job_name: node-exporter
+    static_configs:
+      - targets: ["127.0.0.1:9100"]
+
+# 注意：在 Docker 容器内运行时，127.0.0.1 指向容器自身，
+# 抓取宿主机服务请改为 host.docker.internal:端口。

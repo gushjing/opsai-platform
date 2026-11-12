@@ -1,0 +1,52 @@
+# ---- secrets / local config ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# ---- python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# ---- node ----
+node_modules/
+dist/
+.vite/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---- runtime data & logs ----
+logs/
+*.log
+*.db
+*.sqlite3
+06_data/
+07_logs/
+postgres_data/
+redis_data/
+daemon.lock
+daemon.stop
+daemon.status.json
+tunnel_url.txt
+
+# ---- local machine binaries / installers ----
+runtime/
+00_installers/
+01_python/
+04_middleware/
+
+# ---- editor / OS ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

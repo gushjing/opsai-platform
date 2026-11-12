@@ -1,0 +1,74 @@
+:root {
+  --c-white: #ffffff;
+  --c-bg: #f7f8fa;
+  --c-surface: #fbfcfd;
+  --c-border: #e9ecf1;
+  --c-border-strong: #dfe3ea;
+  --c-text: #1d2129;
+  --c-text-2: #5c6472;
+  --c-muted: #9098a6;
+  --c-blue: #4c6fff;
+  --c-blue-deep: #3a58e6;
+  --c-blue-soft: #eef1ff;
+  --c-blue-softer: #f6f8ff;
+  --radius: 14px;
+
+  --el-color-primary: #4c6fff;
+  --el-color-primary-light-3: #8ea3ff;
+  --el-color-primary-light-5: #b3c0ff;
+  --el-color-primary-light-7: #d9e0ff;
+  --el-color-primary-light-8: #e9edff;
+  --el-color-primary-light-9: #f4f6ff;
+  --el-color-primary-dark-2: #3a58e6;
+  --el-border-radius-base: 10px;
+  --el-border-color: #e9ecf1;
+  --el-text-color-primary: #1d2129;
+  --el-text-color-regular: #5c6472;
+  --el-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body, #app { height: 100%; margin: 0; }
+body {
+  background: var(--c-white);
+  color: var(--c-text);
+  font-family: var(--el-font-family);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, textarea { font-family: inherit; }
+
+/* 全局兜底：长串文字一律在容器内折行，按钮不得撑破父容器 */
+.soft-card, .bubble-user, .plain-answer, .notice, .global-toast { overflow-wrap: anywhere; }
+button { max-width: 100%; }
+
+.muted { color: var(--c-muted); }
+.text-2 { color: var(--c-text-2); }
+.blue { color: var(--c-blue); }
+
+.soft-card {
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+}
+.pill {
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  background: var(--c-white);
+  color: var(--c-text-2);
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .16s ease;
+}
+.pill:hover { border-color: var(--c-blue); color: var(--c-blue); background: var(--c-blue-softer); }
+.pill.active { border-color: var(--c-blue); color: var(--c-blue); background: var(--c-blue-soft); }
+
+.section-title { font-size: 13px; font-weight: 500; color: var(--c-text); margin: 0 0 12px; }
+.divider { height: 1px; background: var(--c-border); }
+
+.el-button--primary { font-weight: 500; }
+.el-input__wrapper, .el-textarea__inner { box-shadow: none !important; }
+.el-table { --el-table-border-color: var(--c-border); --el-table-header-bg-color: var(--c-bg); }
+.el-tabs__item { color: var(--c-muted); }
+.el-tabs__item.is-active { color: var(--c-blue); font-weight: 500; }

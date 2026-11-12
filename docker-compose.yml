@@ -1,0 +1,44 @@
+# OpsAI demo stack. Copy .env.example to .env before starting.
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-opsai}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-opsai_dev}
+      POSTGRES_DB: ${POSTGRES_DB:-opsai}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-opsai} -d ${POSTGRES_DB:-opsai}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redisdata:/data
+
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-opsai}:${POSTGRES_PASSWORD:-opsai_dev}@postgres:5432/${POSTGRES_DB:-opsai}
+      REDIS_URL: redis://redis:6379/0
+      OPSAI_DIST: /app/frontend/dist
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+volumes:
+  pgdata:
+  redisdata:
